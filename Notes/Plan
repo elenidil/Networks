@@ -1,0 +1,15 @@
+In NETS.pdf file:
+
+1. Focus on part 6. Class-Distance models for single nets. TODO: Recalculate full conditionals. 
+2. Rcpp code. Review and understand code with full conditional notes.
+
+
+
+Future extensions:
+
+- Extend for multilayer
+- Optimize code. We have a naive version, think about Hamiltonian montecarlo 
+and Polya-Gamma latent variables (Polson and Scott, 2013)  
+- Variational Bayes?
+
+
