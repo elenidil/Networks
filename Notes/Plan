@@ -1,15 +1,28 @@
 In NETS.pdf file:
 
-1. Focus on part 6. Class-Distance models for single nets. TODO: Recalculate full conditionals. 
-2. Rcpp code. Review and understand code with full conditional notes.
+Focus on part 6. Class-Distance (or SBM-Distance) model for single nets. 
+
+TODO's: 
+
+1. Check full conditionals. 
+
+2. Check Rcpp code. Review and understand code with full conditional notes.
 
 
+Near future extension:
 
-Future extensions:
+- The current model has a Dirichlet-Multinomial prior for the SBM portion of the model. The first step is changing the DM prior for a DP, PY or Gnedin prior.  
 
-- Extend for multilayer
 - Optimize code. We have a naive version, think about Hamiltonian montecarlo 
-and Polya-Gamma latent variables (Polson and Scott, 2013)  
+and Polya-Gamma latent variables (Polson and Scott, 2013).  
+
+
+
+Long term extensions:
+
+
+- Extend for multilayer networks.
+
 - Variational Bayes?
 
 
