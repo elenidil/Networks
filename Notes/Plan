@@ -13,15 +13,15 @@ Near future extension:
 
 - The current model has a Dirichlet-Multinomial prior for the SBM portion of the model. The first step is changing the DM prior for a DP, PY or Gnedin prior.  
 
-- Optimize code. We have a naive version, think about Hamiltonian montecarlo 
-and Polya-Gamma latent variables (Polson and Scott, 2013).  
+- Add shrinkage parameter (e^theta) in the distance term as in Sosa (2020) or Rastelli (2019) 
 
-
+- Optimize code. We have a naive version, think about noisy-likelihood alternatives Hoff (2012) or Rastelli (2019). Or Hamiltonian Montecarlo and Polya-Gamma latent variables (Polson and Scott, 2013). 
+ 
 
 Long term extensions:
 
 
-- Extend for multilayer networks.
+- Extension to multilayer networks.
 
 - Variational Bayes?
 
