@@ -1,0 +1,813 @@
+\documentclass[letterpaper,12pt,openany]{article}
+%%% ----------------------------------------------------------------------
+\pagestyle{headings}
+%%% ----------------------------------------------------------------------
+%%% PAQUETES -------------------------------------------------------------
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage[T1]{fontenc}
+\usepackage{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{flafter}
+\usepackage{amsthm,array}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{latexsym}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{mathtools}
+%\usepackage{longtable}
+%\usepackage{natbib}
+%\usepackage{pb-diagram}
+%\usepackage{makeidx}
+%\usepackage{fancyhdr}
+%\usepackage{fancyvrb}
+%\usepackage{makeidx}
+%\usepackage{textcomp}
+%\usepackage{multicol}
+%\usepackage{multirow}
+%\usepackage{url}
+%\usepackage{tikz}
+%\usepackage{nomencl}
+%\usepackage{bookmark}
+%\usepackage{caption}
+%\usepackage{tabularx}
+%%% ----------------------------------------------------------------------
+%%% TABLES ---------------------------------------------------------------
+%%% ----------------------------------------------------------------------
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline}
+\makeatother
+%%% ----------------------------------------------------------------------
+%%% FORMATO DE PÁGINA ----------------------------------------------------
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\oddsidemargin   0.2  in
+\evensidemargin  0.2  in
+\voffset        -0.3  in
+\hoffset        -0.4  in
+\headsep         0.25 in
+\topmargin       0.0  in
+\textwidth       6.9  in
+\textheight      9.1  in
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+%%% ----------------------------------------------------------------------
+\renewcommand{\baselinestretch}{1.25}
+\renewcommand{\labelitemi}{$\bullet$}
+%%% ----------------------------------------------------------------------
+% SÍMBOLOS ---------------------------------------------------------------
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\def\e#1{{\rm e}^{#1}}
+\def\exp#1{{\rm exp}{#1}}
+\def\frac#1#2{{{#1}\over{#2}}}
+\def\binom#1#2{{{#1}\choose{#2}}}
+\def\spot{$\bullet$\hspace{0.1cm}}
+\def\le{\left}
+\def\ri{\right}
+\def\pro{\propto}
+\def\prop{\propto}
+%
+%\DeclareMathOperator*{\tr}{tr}
+\DeclareMathOperator*{\logit}{logit}
+\DeclareMathOperator*{\expit}{expit}
+%\DeclareMathOperator*{\logistic}{logistic}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand\iid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily iid}}}{\sim}}}
+\newcommand\simiid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily iid}}}{\sim}}}
+\newcommand\simind{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily ind}}}{\sim}}}
+\newcommand\eqd{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily d}}}{=}}}
+\newcommand{\ind}[1]{\mathbf{1}\left\{ #1 \right\}}
+\newcommand{\pr}[1]{\mathbb{P}\text{r}\left[#1\right]}
+\newcommand{\pd}[1]{p\,(\,#1\,)}
+\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\expe}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\var}[1]{\mathbb{V}\text{ar}\left[#1\right]}
+\newcommand{\cov}[1]{\mathbb{C}\text{ov}\left[#1\right]}
+\newcommand{\CV}[1]{\mathbb{C}\mathbb{V}\left[#1\right]}
+\newcommand{\diag}[1]{\text{diag}\left[#1\right]}
+\newcommand{\expo}[1]{\exp{ \left\{ #1 \right\}}}
+\newcommand{\ex}[1]{\exp{ \left\{ #1 \right\}}}
+\newcommand{\quo}[1]{\textquotedblleft#1\textquotedblright}
+\newcommand{\comi}[1]{\textquotedblleft#1\textquotedblright}
+\newcommand{\ra}{\sqrt}
+\newcommand{\bs}{\boldsymbol}
+%
+\def\Unif{\small{\mathsf{Unif}}}
+\def\MN{\small{\mathsf{Mult}}}
+\def\Cat{\small{\mathsf{Cat}}}
+\def\Dir{\small{\mathsf{Dir}}}
+\def\Ber{\small{\mathsf{Ber}}}
+\def\Bin{\small{\mathsf{Bin}}}
+\def\NegBin{\small{\mathsf{NegBin}}}
+\def\Nor{\small{\mathsf{N}}}
+\def\Bet{\small{\mathsf{Beta}}}
+\def\Gamd{\small{\mathsf{Gam}}}
+\def\IGamd{\small{\mathsf{IGam}}}
+%                       \def\rest{\text{rest}}
+\def\rest{\text{rest}}
+%
+\def\A{\mathbf{A}}\def\a{\mathbf{a}}\def\Av{\boldsymbol{A}}\def\av{\boldsymbol{a}}
+\def\B{\mathbf{B}}\def\b{\mathbf{b}}\def\Bv{\boldsymbol{B}}\def\bv{\boldsymbol{b}}
+\def\C{\mathbf{C}}\def\c{\mathbf{c}}\def\Cv{\boldsymbol{C}}\def\cv{\boldsymbol{c}}
+\def\D{\mathbf{D}}\def\d{\mathbf{d}}\def\Dv{\boldsymbol{D}}\def\dv{\boldsymbol{d}}
+\def\E{\mathbf{E}}\def\e{\mathbf{e}}\def\Ev{\boldsymbol{E}}\def\ev{\boldsymbol{e}}
+\def\F{\mathbf{F}}\def\f{\mathbf{f}}\def\Fv{\boldsymbol{F}}\def\fv{\boldsymbol{f}}
+\def\G{\mathbf{G}}\def\g{\mathbf{g}}\def\Gv{\boldsymbol{G}}\def\gv{\boldsymbol{g}}
+\def\H{\mathbf{H}}\def\h{\mathbf{h}}\def\Hv{\boldsymbol{H}}\def\hv{\boldsymbol{h}}
+\def\I{\mathbf{I}}\def\i{\mathbf{i}}\def\Iv{\boldsymbol{I}}\def\iv{\boldsymbol{i}}
+\def\J{\mathbf{J}}\def\j{\mathbf{j}}\def\Jv{\boldsymbol{J}}\def\jv{\boldsymbol{j}}
+\def\K{\mathbf{K}}\def\k{\mathbf{k}}\def\Kv{\boldsymbol{K}}\def\kv{\boldsymbol{k}}
+\def\L{\mathbf{L}}\def\l{\mathbf{l}}\def\Lv{\boldsymbol{L}}\def\lv{\boldsymbol{l}}
+\def\M{\mathbf{M}}\def\m{\mathbf{m}}\def\Mv{\boldsymbol{M}}\def\mv{\boldsymbol{m}}
+\def\N{\mathbf{N}}\def\n{\mathbf{n}}\def\Nv{\boldsymbol{N}}\def\nv{\boldsymbol{n}}
+\def\O{\mathbf{O}}\def\o{\mathbf{o}}\def\Ov{\boldsymbol{O}}\def\ov{\boldsymbol{o}}
+\def\P{\mathbf{P}}\def\p{\mathbf{p}}\def\Pv{\boldsymbol{P}}\def\pv{\boldsymbol{p}}
+\def\Q{\mathbf{Q}}\def\q{\mathbf{q}}\def\Qv{\boldsymbol{Q}}\def\qv{\boldsymbol{q}}
+\def\R{\mathbf{R}}\def\r{\mathbf{r}}\def\Rv{\boldsymbol{R}}\def\rv{\boldsymbol{r}}
+\def\S{\mathbf{S}}\def\s{\mathbf{s}}\def\Sv{\boldsymbol{S}}\def\sv{\boldsymbol{s}}
+\def\T{\mathbf{T}}\def\t{\mathbf{t}}\def\Tv{\boldsymbol{T}}\def\tv{\boldsymbol{t}}
+\def\U{\mathbf{U}}\def\u{\mathbf{u}}\def\Uv{\boldsymbol{U}}\def\uv{\boldsymbol{u}}
+\def\V{\mathbf{V}}\def\v{\mathbf{v}}\def\Vv{\boldsymbol{V}}\def\vv{\boldsymbol{v}}
+\def\W{\mathbf{W}}\def\w{\mathbf{w}}\def\Wv{\boldsymbol{W}}\def\wv{\boldsymbol{w}}
+\def\X{\mathbf{X}}\def\x{\mathbf{x}}\def\Xv{\boldsymbol{X}}\def\xv{\boldsymbol{x}}
+\def\Y{\mathbf{Y}}\def\y{\mathbf{y}}\def\Yv{\boldsymbol{Y}}\def\yv{\boldsymbol{y}}
+\def\Z{\mathbf{Z}}\def\z{\mathbf{z}}\def\Zv{\boldsymbol{Z}}\def\zv{\boldsymbol{z}}
+%
+\def\al{\alpha}\def\alv{\boldsymbol{\alpha}}
+\def\be{\beta}\def\bev{\boldsymbol{\beta}}
+\def\ga{\gamma}\def\gav{\boldsymbol{\gamma}}
+\def\de{\delta}\def\dev{\boldsymbol{\delta}}
+\def\del{\delta}\def\delv{\boldsymbol{\delta}}
+\def\eps{\epsilon}\def\epsv{\boldsymbol{\epsilon}}
+\def\veps{\varepsilon}\def\vepsv{\boldsymbol{\varepsilon}}
+\def\ze{\zeta}\def\zev{\boldsymbol{\zeta}}
+\def\te{\theta}\def\tev{\boldsymbol{\theta}}
+\def\vte{\vartheta}\def\vtev{\boldsymbol{\vartheta}}
+\def\io{\iota}\def\iov{\boldsymbol{\iota}}
+\def\ka{\kappa}\def\kav{\boldsymbol{\kappa}}
+\def\la{\lambda}\def\lav{\boldsymbol{\lambda}}
+\def\lam{\lambda}\def\lamv{\boldsymbol{\lambda}}
+\def\vrho{\varrho}\def\vrhov{\boldsymbol{\varrho}}
+\def\si{\sigma}\def\siv{\boldsymbol{\sigma}}
+\def\sig{\sigma}\def\sigv{\boldsymbol{\sigma}}
+\def\vsi{\varsigma}\def\vsiv{\boldsymbol{\varsigma}}
+\def\ups{\upsilon}\def\upsv{\boldsymbol{\upsilon}}
+\def\vphi{\varphi}\def\vphiv{\boldsymbol{\varphi}}
+\def\om{\omega}\def\omv{\boldsymbol{\omega}}\def\omev{\boldsymbol{\omega}}
+\def\ome{\omega}
+\def\kap{\kappa}
+\def\etav{\boldsymbol{\eta}}
+\def\xiv{\boldsymbol{\xi}}
+\def\psiv{\boldsymbol{\psi}}
+\def\nuv{\boldsymbol{\nu}}
+\def\muv{\boldsymbol{\mu}}
+\def\rhov{\boldsymbol{\rho}}\def\rov{\boldsymbol{\rho}}
+\def\piv{\boldsymbol{\pi}}
+\def\phiv{\boldsymbol{\phi}}
+%
+\def\Ga{\Gamma}\def\GA{\mathbf{\Gamma}}
+\def\Gam{\Gamma}\def\GAM{\mathbf{\Gamma}}
+\def\De{\Delta}\def\DE{\mathbf{\Delta}}
+\def\Del{\Delta}\def\DEL{\mathbf{\Delta}}
+\def\Te{\Theta}\def\TE{\mathbf{\Theta}}
+\def\La{\Lambda}\def\LA{\mathbf{\Lambda}}
+\def\Lam{\Lambda}\def\LAM{\mathbf{\Lambda}}
+\def\XI{\mathbf{\Xi}}
+\def\PI{\mathbf{\Pi}}
+\def\Si{\Sigma}\def\SI{\mathbf{\Sigma}}
+\def\Sig{\Sigma}\def\SIG{\mathbf{\Sigma}}
+\def\Ups{\Upsilon}\def\UPS{\mathbf{\Upsilon}}
+\def\PHI{\mathbf{\Phi}}
+\def\PSI{\mathbf{\Psi}}
+\def\Om{\Omega}\def\OM{\mathbf{\Omega}}
+\def\Ome{\Omega}\def\OME{\mathbf{\Omega}}
+%
+\def\zerov{\boldsymbol{0}}
+\def\onev{\boldsymbol{1}}
+\def\reals{\mathbb{R}}
+%
+\def\@roman#1{\romannumeral #1}
+\makeatother
+
+%%% ----------------------------------------------------------------------
+% COLORES  ---------------------------------------------------------------
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%\definecolor{violet}{rgb}{0.56, 0.0, 1.0}
+%
+%%% ----------------------------------------------------------------------
+\allowdisplaybreaks
+%%% ----------------------------------------------------------------------
+%%% ----------------------------------------------------------------------
+% DOCUMENT ---------------------------------------------------------------
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{document}
+
+\title{Models}
+
+\date{}
+
+\maketitle
+
+\section{Data}
+
+Adjacency matrix $\Y = [y_{i,i'}]$ corresponding to an undirected, binary network.
+
+\section{Erdos--Renyi Model}
+
+\textbf{Likelihood}
+$$
+\begin{aligned}
+y_{i,i'}\mid\theta \simind \Ber\left( \theta \right) 
+\end{aligned}
+$$
+
+\textbf{Prior}
+$$
+\theta \sim \Bet(a_\theta, b_\theta)
+$$
+
+\textbf{Parameters} $$\UPS= (\theta)\,.$$
+
+\textbf{Hyper-parameters} $$(a_{\theta}, b_{\theta})\,.$$
+
+\textbf{Posterior}
+$$
+p(\theta\mid\Y) = p(\Y\mid \theta)\,p(\theta) = 
+\theta^{a_\theta + s_y -1}(1-\theta)^{b_\theta + N - s_y -1} =
+\Bet(\theta\mid a_\theta + s_y, b_\theta + N - s_y)\,,
+$$
+where $s_y = \sum_{i=1}^{I-1}\sum_{i'=i+1}^I y_{i,i'}$ and $N = I(I-1)/2$. 
+
+\textbf{Prior Elicitation}
+$$
+a_\theta = 1\,,\qquad b_\theta = 1\,.
+$$
+
+\section{Distance Model}
+
+\textbf{Likelihood}
+$$
+\begin{aligned}
+y_{i,i'}\mid\zeta,\uv_{i},\uv_{i'} \simind \Ber\left( \expit(\zeta - \|\uv_{i} - \uv_{i'}\| ) \right) 
+\end{aligned}
+$$
+
+\textbf{Prior}
+$$
+\begin{aligned}
+\uv_{i}\mid\sigma^2  & \simiid \Nor(\zerov,\sig^2\I) \\
+\sigma^2             & \sim    \IGamd(a_{\sig}, b_{\sig})\\
+\zeta\mid \ome^2     & \sim    \Nor(0,\ome^2) \\
+\ome^2               & \sim    \IGamd(a_\ome, b_\ome)
+\end{aligned}
+$$
+
+\textbf{Parameters} 
+$$\UPS= (\uv_1,\ldots,\uv_I, \zeta, \sigma^2, \ome^2)\,,$$ where $\zeta\in\reals$ and $\uv_i=(u_{i,1},\ldots,u_{i,K})\in\reals^K$.
+
+\textbf{Hyper-parameters} 
+$$(a_{\sig}, b_{\sig}, a_{\ome}, b_{\ome})\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y) &= p(\Y\mid \zeta, \{\uv_i\})\,p(\{\uv_i\}\mid \sigma^2)\,p(\sigma^2)\,p(\zeta\mid\omega^2)\,p(\omega^2)\\
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times
+\prod_{i=1}^I (\sig^2)^{-K/2}\,\ex{-\tfrac{1}{2\sig^2}\,\|\uv_i\|^2} \times(\sig^2)^{-(a_\sig+1)}\,\ex{-\frac{b_\sig}{\sig^2}} \\
+&\hspace{0.5cm}\times (\ome^2)^{-1/2} \ex{-\tfrac{1}{2\ome^2}\,\zeta^2}  \times (\ome^2)^{-(a_\ome+1)}\,\ex{-\frac{b_\ome}{\ome^2}}\,,
+\end{align*}
+where $\theta_{i,i'}=\expit(\zeta- \|\uv_i - \uv_{i'}\|)$.
+
+\textbf{MCMC Algorithm} 
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	\item Sample $\uv_i^{(b+1)}$, $i = 1,\ldots,I$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+		p(\uv_i\mid\rest)
+		&\propto\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times
+		\prod_{i'=1}^{i-1} \theta_{i',i}^{y_{i',i}}(1-\theta_{i',i})^{1-y_{i',i}} \times\ex{-\tfrac{1}{2\sig^2}\,\|\uv_i\|^2}\,.
+	\end{align*}
+	\item Sample $\zeta^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\zeta\mid\rest)
+	&\propto
+	\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{2\ome^2}\,\zeta^2}.
+	\end{align*}
+
+	\item Sample $(\si^2)^{(b+1)}$ from
+	$p(\sig^2\mid\rest) = \IGamd\le(\sig^2 \mid a_\sig + \tfrac{I\,K}2, b_\sig + \tfrac12 \textstyle\sum_{i=1}^I\|\uv_i\|^2 \ri)\,.$
+	
+	\item Sample $(\ome^2)^{(b+1)}$ from
+	$p(\ome^2\mid\rest) = \IGamd\le(\ome^2 \mid a_\omega + \tfrac12, b_\omega + \tfrac12 \zeta^2 \ri)\,.$
+\end{enumerate}
+
+\textbf{Prior Elicitation}
+
+Setting a priori $\expec{\sigma^2} = V_2\left(I^{1/K}\right)$ and $\expec{\omega^2} = 100$, with $\CV{\sigma^2} = \CV{\omega^2} = \infty$, it follows that
+$$
+a_\sig = 2\,,\qquad b_\sig = V_2\left(I^{1/K}\right)  \,,\qquad a_\ome =2\,,\qquad b_\ome = 100\,,
+$$
+where $V_2(I^{1/K})$ is the volume of a $2$-dimensional Euclidean ball of radius $I^{1/K}$.
+ 
+\section{Class Model (Stochastic Block Model, SBM)}
+
+\textbf{Likelihood}
+$$y_{i,i'}\mid \xi_i,\xi_{i'}, \{\eta_{k,\ell}\} \simind \Ber\left( \expit\eta_{\phi(\xi_i,\xi_{i'})}  \right)$$
+\begin{align*}
+p(\Y\mid\{\xi_{i}\},\{\eta_{k,\ell}\}) &= \prod_{i=1}^{I-1}\prod_{i'=i+1}^I(\expit \eta_{\phi(\xi_i,\xi_{i'})})^{y_{i,i'}}(1-\expit \eta_{\phi(\xi_i,\xi_{i'})})^{1-y_{i,i'}} \\
+&=\prod_{k=1}^{K}\prod_{\ell=k}^K (\expit \eta_{k,\ell})^{s_{k,\ell}}(1-\expit \eta_{k,\ell})^{n_{k,\ell}-s_{k,\ell}}
+\end{align*}
+where $s_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} y_{i,i'}$, $n_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} 1$, with $\mathcal{S}_{k,\ell} = \{(i,i'):i<i'\text{ and }\phi(\xi_i,\xi_{i'})=(k,\ell)\}$, and $\phi(x,y)=(\min\{x,y\},\max\{x,y\})$ is a function to take into account that $\Y = [y_{i,i'}]$ is a symmetric matrix.
+
+\textbf{Prior}
+\begin{align*}
+\eta_{k,\ell}\mid\zeta,\tau^2 &\simiid \Nor(\zeta,\tau^2) \\
+\zeta &\sim \Nor(\mu_\zeta,\sigma^2_\zeta) \\
+\tau^2 &\sim \IGamd(a_\tau,b_\tau) \\
+\xi_i\mid\omev &\simiid \Cat(\omev) \\
+\omev\mid\al &\sim \Dir\left(\tfrac{\al}{K},\ldots,\tfrac{\al}{K}\right) \\
+\al &\sim \Gamd(a_\al,b_\al)
+\end{align*}
+
+\textbf{Parameters}
+$$\UPS=(\eta_{1,1},\eta_{1,2},\ldots,\eta_{K,K}, \xi_1,\ldots,\xi_I,\omega_1,\ldots,\omega_K,\zeta,\tau^2,\alpha)\,,$$
+where $\xi_i\in\{1,\ldots,K\}$, $i=1,\ldots,I$, are the cluster assignments ($\xi_i=k$ means that actor $i$ belongs to cluster $k$), and $\omev=(\ome_1,\ldots,\ome_K)$ is a probability vector such that $\pr{\xi_i=k\mid w_k} = w_k$, $k=1,\ldots,K$.
+
+\textbf{Hyper-parameters}
+$$(\mu_\zeta,\sigma^2_\zeta,a_\tau,b_\tau,a_\al,b_\al)\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y) &= p(\Y\mid\{\xi_i\},\{\eta_{k,\ell}\})\,p(\{\eta_{k,\ell}\}\mid\zeta,\tau^2)\,p(\zeta)\,p(\tau^2)\,p(\{\xi_i \}\mid\omev)\,p(\omev\mid\alpha)\,p(\alpha)\\
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}
+\times \ex{-\tfrac{1}{2\sig_\zeta^2}(\zeta-\mu_\zeta)^2} \times (\tau^2)^{-(a_\tau-1)}\,\ex{-\frac{b_\tau}{\tau^2}} \\
+&\hspace{0.5cm} \times \prod_{k=1}^K\prod_{\ell=k}^K (\tau^2)^{-1/2}\,\ex{-\tfrac{1}{2\tau^2}(\eta_{k,\ell} - \zeta)^2} \times \prod_{i=1}^I\prod_{k=1}^K\omega_k^{[\xi_i=k]} \times \frac{\Gamma\left(\tfrac{\al}{K}\right)^K}{\Gamma(\alpha)}\,\prod_{k=1}^K \ome_k^{\tfrac{\al}{K}-1}\\
+ &\hspace{0.5cm}\times \alpha^{a_\al-1}\,\ex{-b_\al\,\al}\,,
+\end{align*}
+where $\theta_{i,i'}=\expit(\eta_{\phi(\xi_i,\xi_{i'})})$ and $[\cdot]$ is the Iverson bracket.
+
+
+\textbf{MCMC}
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	
+	\item Sample $\eta_{k,\ell}^{(b+1)}$, $\ell = k,\ldots,K$ and $k = 1,\ldots,K$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	\log p(\eta_{k,\ell}\mid\rest) 
+	&\propto 
+	s_{k,\ell}\log(\expit\eta_{k,\ell}) + (n_{k,\ell}-s_{k,\ell})\log(1-\expit\eta_{k,\ell}) - \frac{1}{2\tau^2}(\eta_{k,\ell} - \zeta)^2 \\
+	&= s_{k,\ell}\,\eta_{k,\ell} - n_{k,\ell} \log(1 + \exp\,\eta_{k,\ell}) - \frac{1}{2\tau^2}(\eta_{k,\ell} - \zeta)^2\,,
+	\end{align*}
+	where $s_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} y_{i,i'}$ and $n_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} 1$, with $\mathcal{S}_{k,\ell} = \{(i,i'):i<i'\text{ and }\phi(\xi_i,\xi_{i'})=(k,\ell)\}$. 
+	
+	\item Sample $\xi_i^{(b+1)}$, $i=1,\ldots,I$, from a categorical distribution on $\{1,\ldots,K\}$, such that:
+	$$
+	\pr{\xi_i=k\mid\rest}\propto \omega_k
+	\times\prod_{i'=i+1}^I \eta_{\phi(k,\xi_{i'})}^{y_{i,i'}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i,i'}}
+	\times\prod_{i'=1}^{i-1} \eta_{\phi(\xi_{i'},k)}^{y_{i',i}}(1-\eta_{\phi(\xi_{i'},k)})^{1-y_{i',i}}\,.
+	$$
+	
+	\item Sample $\omev^{(b+1)}$ from $p(\omev\mid\rest) = \Dir\left(\omev\mid\tfrac{\al}{K}+n_1,\ldots,\tfrac{\al}{K}+n_K\right)$, where $n_k$ is the number of actors in cluster $k\in\{1,\ldots,K\}$.
+	
+	\item Sample $\zeta^{(b+1)}$ from $\Nor(m,v^2)$, where
+	$$v^2 = \left(\frac{1}{\sigma^2_\zeta} + \frac{K(K+1)/2}{\tau^2}\right)^{-1} \qquad\text{and}\qquad m =	v^2\,\left( \frac{\mu_\zeta}{\sigma^2_\zeta} + \frac{1}{\tau^2}\sum_{k=1}^K\sum_{\ell=k}^K\eta_{k,\ell} \right)\,.$$
+	
+	\item Sample $(\si^2)^{(b+1)}$ from
+	$p(\sig^2\mid\rest) = \IGamd\le(\sig^2 \mid a_\tau + \tfrac{K(K+1)}4, b_\tau + \tfrac12\sum_{k=1}^K\sum_{\ell=k}^K (\eta_{k,\ell}-\zeta)^2  \ri).$
+	
+	\item Sample $\alpha^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	\log p(\alpha\mid\rest)
+	&\propto
+	\log\Gamma(\alpha) - K\log\Gamma(\alpha/K) + \frac{\al}{K}\sum_{k=1}^K\log\omega_k - (a_\beta-1)\log\al - b_\al\,\al\,.
+	\end{align*}
+	
+\end{enumerate}
+
+\textbf{Prior Elicitation}
+
+$$
+\mu_\zeta = 0\,,\qquad\sig_\zeta^2=3\,,\qquad a_\tau=2\,,\qquad b_\tau = 3 \,,\qquad a_\al=1\,,\qquad b_\al = 1\,.
+$$
+
+\section{Eigen Model}
+
+\textbf{Likelihood}
+$$
+\begin{aligned}
+y_{i,i'}\mid\zeta,\uv_{i},\uv_{i'}, \LAM \simind \Ber\left( \expit(\zeta + \uv_{i}^T \LAM \uv_{i'} ) \right) 
+\end{aligned}
+$$
+
+\textbf{Prior}
+$$
+\begin{aligned}
+\uv_{i}\mid\sigma^2 & \simiid \Nor(\zerov,\sig^2\I) \\
+\sigma^2            & \sim    \IGamd(a_{\sig}, b_{\sig}) \\
+\lambda_k\mid\kap^2 & \simiid \Nor(0,\kap^2)        \\
+\kappa^2            & \sim    \IGamd(a_{\kap}, b_{\kap}) \\
+\zeta\mid \ome^2    & \sim    \Nor(0,\ome^2)        \\
+\ome^2              & \sim    \IGamd(a_{\ome}, b_{\ome})
+\end{aligned}
+$$
+
+\textbf{Parameters} $$\UPS= (\uv_1,\ldots,\uv_I, \lambda_1,\ldots,\lambda_K, \zeta, \sigma^2, \kappa^2, \ome^2)\,,$$ where $\zeta\in\reals$ and $\uv_i=(u_{i,1},\ldots,u_{i,K})\in\reals^K$, and $\LAM = \diag{\lambda_1,\ldots, \lambda_K}$.
+
+\textbf{Hyper-parameters} $$(a_{\sig}, b_{\sig}, a_{\kap}, b_{\kap}, a_{\ome}, b_{\ome})\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y) &= p(\Y\mid\zeta,\{\uv_i \}, \{\lambda_k\} )\,p(\{\uv_i \}\mid\sigma^2)\,p(\sigma^2)\,p(\{\lambda_k \}\mid\kappa^2)\,p(\kappa^2)\,p(\zeta\mid\omega^2)\,p(\omega^2)\\
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times
+\prod_{i=1}^I (\sig^2)^{-K/2}\,\ex{-\tfrac{1}{2\sig^2}\,\|\uv_i\|^2} \times(\sig^2)^{-(a_\sig+1)}\,\ex{-\frac{b_\sig}{\sig^2}} \\
+&\hspace{0.5cm} \times \prod_{k=1}^K (\kap^2)^{-1/2} \ex{-\tfrac{1}{2\kap^2}\,\lambda_k^2} \times(\kap^2)^{-(a_\kap+1)}\,\ex{-\frac{b_\kap}{\kap^2}} \times (\ome^2)^{-1/2} \ex{-\tfrac{1}{2\ome^2}\,\zeta^2}  \\
+&\hspace{0.5cm} \times (\ome^2)^{-(a_\ome+1)}\,\ex{-\frac{b_\ome}{\ome^2}}\,,
+\end{align*}
+where $\theta_{i,i'}=\expit(\zeta + \uv_i \LAM \uv_{i'})$.
+
+\textbf{MCMC} 
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	\item Sample $\uv_i^{(b+1)}$, $i=1,\ldots,I$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\uv_i\mid\rest)
+	&\propto\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times
+	\prod_{i'=1}^{i-1} \theta_{i',i}^{y_{i',i}}(1-\theta_{i',i})^{1-y_{i',i}} \times\ex{-\tfrac{1}{2\sig^2}\,\|\uv_i\|^2}\,.
+	\end{align*}
+	
+	\item Sample $\lambda_k^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	$$
+	p(\lambda_k\mid\rest) \prop \prod_{i=1}^{I-1}\prod_{i'=i+1}^I\theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{2\kap^2}\,\lambda_k^2}\,.
+	$$
+	\item Sample $\zeta^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\zeta\mid\rest)
+	&\propto
+	\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{\ome^2}\,\zeta^2}.
+	\end{align*}
+	
+	\item Sample $(\si^2)^{(b+1)}$ from
+	$p(\sig^2\mid\rest) = \IGamd\le(\sig^2 \mid a_\sig + \tfrac{I\,K}2, b_\sig + \tfrac12 \textstyle\sum_{i=1}^I\|\uv_i\|^2 \ri)\,.$
+	
+	\item Sample $(\kap^2)^{(b+1)}$ from
+	$p(\kap^2\mid\rest) = \IGamd\le(\kap^2 \mid a_\kap + \tfrac{Q}2, b_\kap + \tfrac12 \textstyle\sum_{k=1}^K\lambda_k^2 \ri)\,.$
+	
+	\item Sample $(\ome^2)^{(b+1)}$ from
+	$p(\ome^2\mid\rest) = \IGamd\le(\ome^2 \mid a_\sig + \tfrac12, b_\sig + \tfrac12 \zeta^2 \ri)\,.$
+\end{enumerate}
+
+\textbf{Prior Elicitation}
+
+Setting a priori $\expec{\sigma^2} = \expec{\kappa^2} = \expec{\omega^2} = 3$, with $\CV{\sigma^2} = \CV{\kappa^2} = \CV{\omega^2} = \infty$, it follows that
+$$
+a_\sig = 2\,,\qquad b_\sig = 3  \,,\qquad 
+a_\kap = 2\,,\qquad b_\kap = 3  \,,\qquad
+a_\ome = 2\,,\qquad b_\ome = 3\,.
+$$
+
+
+\section{Class--Distance Model}
+
+\textbf{Likelihood}
+$$y_{i,i'}\mid \zeta, \{\uv_k \}, \xi_i,\xi_{i'} \simind \Ber\left( \expit\eta_{\phi(\xi_i,\xi_{i'})}  \right)$$
+where
+$$\eta_{k,\ell} = \zeta - \|\uv_k - \uv_\ell\|$$
+\textbf{Prior}
+\begin{align*}
+\uv_{k}\mid\sigma^2 & \simiid \Nor(\zerov,\sig^2\I) \\
+\sigma^2            & \sim    \IGamd(a_{\sig}, b_{\sig}) \\
+\zeta\mid \ome^2    & \sim    \Nor(0,\ome^2)        \\
+\ome^2              & \sim    \IGamd(a_{\ome}, b_{\ome}) \\
+\xi_i\mid\omev &\simiid \Cat(\omev) \\
+\omev\mid\al &\sim \Dir\left(\tfrac{\al}{K},\ldots,\tfrac{\al}{K}\right) \\
+\al &\sim \Gamd(a_\al,b_\al)
+\end{align*}
+
+\textbf{Parameters}
+$$\UPS=(\uv_1,\ldots,\uv_K, \xi_1,\ldots,\xi_I,\omega_1,\ldots,\omega_K, \sig^2, \ome^2, \alpha)\,,$$
+where $\zeta\in\reals$ and $\uv_k=(u_{k,1},\ldots,u_{k,Q})\in\reals^Q$.
+
+\textbf{Hyper-parameters} $$(a_{\sig}, b_{\sig}, a_{\ome}, b_{\ome}, a_\al, b_\al)\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y) &= p(\Y\mid \zeta, \{\uv_k \}, \{\xi_{i}\}, \{\xi_{i'}\})\,p(\{\uv_k\}\mid\sigma^2)\,p(\sigma^2)\,p(\zeta\mid\omega^2)\,p(\omega^2)\,p(\{\xi_i\}\mid\omev)\,p(\omev\mid\alpha)\,p(\alpha)\\
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times 
+\prod_{k=1}^K (\sig^2)^{-K/2}\,\ex{-\tfrac{1}{2\sig^2}\,\|\uv_k\|^2} \times(\sig^2)^{-(a_\sig+1)}\,\ex{-\frac{b_\sig}{\sig^2}} \\
+&\hspace{0.5cm} \times (\ome^2)^{-1/2} \ex{-\tfrac{1}{2\ome^2}\,\zeta^2} \times (\ome^2)^{-(a_\ome+1)}\,\ex{-\frac{b_\ome}{\ome^2}} 
+\times \prod_{i=1}^I\prod_{k=1}^K\omega_k^{[\xi_i=k]} \times \frac{\Gamma\left(\tfrac{\al}{K}\right)^K}{\Gamma(\alpha)}\,\prod_{k=1}^K \ome_k^{\tfrac{\al}{K}-1} \\
+&\hspace{0.5cm} \times \alpha^{a_\al-1}\,\ex{-b_\al\,\al}
+\end{align*}
+where $\theta_{i,i'}=\expit\eta_{\phi(\xi_i,\xi_{i'})}$ and $[\cdot]$ is the Iverson bracket.
+
+\textbf{MCMC}
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	\item Sample $\uv_k^{(b+1)}$, $k=1,\ldots,K$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\uv_k\mid\rest)
+	&\propto\prod_{\substack{i,i':i<i'\\\xi_i = k\text{ or }\xi_{i'} = k}} \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times\ex{-\tfrac{1}{2\sig^2}\,\|\uv_k\|^2}\,.
+	\end{align*}
+	
+	\item Sample $\zeta^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\zeta\mid\rest)
+	&\propto
+	\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{\ome^2}\,\zeta^2}.
+	\end{align*}
+		
+	\item Sample $\xi_i^{(b+1)}$, $i = 1,\ldots,I$, from a categorical distribution on $\{1,\ldots,K\}$, such that:
+	$$
+	\pr{\xi_i=k\mid\rest}\propto \omega_k
+	\times\prod_{i'=i+1}^I \eta_{\phi(k,\xi_{i'})}^{y_{i,i'}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i,i'}}
+	\times\prod_{i'=1}^{i-1} \eta_{\phi(\xi_{i'},k)}^{y_{i',i}}(1-\eta_{\phi(\xi_{i'},k)})^{1-y_{i',i}}\,.
+	$$
+	
+	\item Sample $\omev^{(b+1)}$ from $p(\omev\mid\rest) = \Dir(\omev\mid\tfrac{\al}{K}+n_1,\ldots,\tfrac{\al}{K}+n_K)$, where $n_k$ is the number of actors in cluster $k\in\{1,\ldots,K \}$.
+	
+	\item Sample $(\si^2)^{(b+1)}$ from
+	$p(\sig^2\mid\rest) = \IGamd\le(\sig^2 \mid a_\sig + \tfrac{K\,Q}2, b_\sig + \tfrac12 \textstyle\sum_{k=1}^K\|\uv_k\|^2 \ri)\,.$
+	
+	\item Sample $(\ome^2)^{(b+1)}$ from
+	$p(\ome^2\mid\rest) = \IGamd\le(\ome^2 \mid a_\sig + \tfrac12, b_\sig + \tfrac12 \zeta^2 \ri)\,.$
+	
+	\item Sample $\alpha^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	\log p(\alpha\mid\rest)
+	&\propto
+	\log\Gamma(\alpha) - K\log\Gamma(\alpha/K) + \frac{\al}{K}\sum_{k=1}^K\log\omega_k - (a_\al-1)\log\al - b_\al\,\al\,.
+	\end{align*}
+	
+\end{enumerate}
+
+\textbf{Prior Elicitation}
+Setting a priori $\expec{\sigma^2} = V_2\left(K^{1/Q}\right)$, $\expec{\omega^2} = 3$ and $\expec{\al} = 1$, with $\CV{\sigma^2} = \CV{\omega^2} = \infty$ and $\CV{\al} = 1$, it follows that
+$$
+a_\sig = 2\,,\qquad b_\sig = \, V_2\left(K^{1/Q}\right)  \,,\qquad a_\ome =2\,,\qquad b_\ome = \,3\,,\qquad a_\al = 1\,,\qquad b_\al = 1\,,
+$$
+where $V_2(K^{1/Q})$ is the volume of a $2$-dimensional Euclidean ball of radius $I^{1/Q}$.
+
+\section{Class--Eigen Model}
+
+\textbf{Likelihood}
+$$y_{i,i'}\mid \zeta, \{\uv_k\},\LAM, \xi_i,\xi_{i'} \simind \Ber\left( \expit\eta_{\phi(\xi_i,\xi_{i'})}  \right)$$
+where
+$$\eta_{k,\ell} = \zeta + \uv_k^T\LAM\uv_\ell$$
+\textbf{Prior}
+\begin{align*}
+\uv_{k}\mid\sigma^2 & \simiid \Nor(\zerov,\sig^2\I) \\
+\sigma^2            & \sim    \IGamd(a_{\sig}, b_{\sig}) \\
+\lambda_q\mid\kap^2 & \simiid \Nor(0,\kap^2)        \\
+\kappa^2            & \sim    \IGamd(a_{\kap}, b_{\kap}) \\
+\zeta\mid \ome^2    & \sim    \Nor(0,\ome^2)        \\
+\ome^2              & \sim    \IGamd(a_{\ome}, b_{\ome}) \\
+\xi_i\mid\omev &\simiid \Cat(\omev) \\
+\omev\mid\al &\sim \Dir\left(\tfrac{\al}{K},\ldots,\tfrac{\al}{K}\right) \\
+\al &\sim \Gamd(a_\al,b_\al)
+\end{align*}
+
+\textbf{Parameters}
+$$\UPS=(\uv_1,\ldots,\uv_K, \lam_1, \ldots, \lambda_Q, \xi_1,\ldots,\xi_I,\omega_1,\ldots,\omega_K, \sig^2, \kap^2, \ome^2, \alpha)\,,$$
+where $\zeta\in\reals$ and $\uv_k=(u_{k,1},\ldots,u_{k,Q})\in\reals^Q$, and $\LAM = \diag{\lambda_1,\ldots,\lambda_Q}$.
+
+\textbf{Hyper-parameters} $$(a_{\sig}, b_{\sig}, a_{\kap}, b_{\kap}, a_{\ome}, b_{\ome}, a_\al, b_\al)\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y) &= p(\Y\mid\zeta, \{\uv_k\},\{\lambda_q \}, \{\xi_i \} )\,
+p(\{\uv_k\}\mid\sigma^2)\,p(\sigma^2) \, p(\{\lambda_q\}\mid \kappa^2)\,p(\kap^2)\, \,p(\zeta\mid\omega^2)\,p(\omega^2)\, \\ &\hspace{0.5cm}p(\{\xi_i\}\mid\omev)\,p(\omev\mid\alpha)\,p(\alpha) \\
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times 
+\prod_{k=1}^K (\sig^2)^{-K/2}\,\ex{-\tfrac{1}{2\sig^2}\,\|\uv_k\|^2} \times(\sig^2)^{-(a_\sig+1)}\,\ex{-\frac{b_\sig}{\sig^2}} \\
+&\hspace{0.5cm} \times \prod_{q=1}^Q (\kap^2)^{-1/2} \ex{-\tfrac{1}{2\kap^2}\,\lambda_q^2}\times(\kap^2)^{-(a_\kap+1)}\,\ex{-\frac{b_\kap}{\kap^2}}
+\times (\ome^2)^{-1/2} \ex{-\tfrac{1}{2\ome^2}\,\zeta^2}  \\ &\hspace{0.5cm} \times (\ome^2)^{-(a_\ome+1)}\,\ex{-\frac{b_\ome}{\ome^2}}	
+\times \prod_{i=1}^I\prod_{k=1}^K\omega_k^{[\xi_i=k]} \times \frac{\Gamma\left(\tfrac{\al}{K}\right)^K}{\Gamma(\alpha)}\,\prod_{k=1}^K \ome_k^{\tfrac{\al}{K}-1} \times \alpha^{a_\al-1}\,\ex{-b_\al\,\al}\,,
+\end{align*}
+where $\theta_{i,i'}=\expit\eta_{\phi(\xi_i,\xi_{i'})}$ and $[\cdot]$ is the Iverson bracket.
+
+\textbf{MCMC}
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	\item Sample $\uv_k^{(b+1)}$, $k=1,\ldots,K$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\uv_k\mid\rest)
+	&\propto\prod_{\substack{i<i'\\\xi_i = k\text{ or }\xi_{i'} = k}} \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} \times\ex{-\tfrac{1}{2\sig^2}\,\|\uv_k\|^2}\,.
+	\end{align*}
+	
+	\item Sample $\lambda_q^{(b+1)}$, $q = 1,\ldots,Q$, according to a Metropolis--Hastings Algorithm, considering the fcd:
+	$$
+	p(\lambda_q\mid\rest) \propto \prod_{i=1}^{I-1}\prod_{i'=i+1}^{I} \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{2\kap^2}\,\lambda_q^2}\,.
+	$$
+	\item Sample $\zeta^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\zeta\mid\rest)
+	&\propto
+	\prod_{i=1}^{I-1}\prod_{i'=i+1}^{I} \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}\times \ex{-\tfrac{1}{\ome^2}\,\zeta^2}.
+	\end{align*}
+	
+	\item Sample $\xi_i^{(s+1)}$, $i=1,\ldots,I$, from a categorical distribution on $\{1,\ldots,K\}$, such that:
+	$$
+	\pr{\xi_i=k\mid\rest}\propto \omega_k
+	\times\prod_{i'=i+1}^I \eta_{\phi(k,\xi_{i'})}^{y_{i,i'}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i,i'}}
+	\times\prod_{i'=1}^{i-1} \eta_{\phi(\xi_{i'},k)}^{y_{i',i}}(1-\eta_{\phi(\xi_{i'},k)})^{1-y_{i',i}}\,.
+	$$
+	
+	\item Sample $\omev^{(b+1)}$ from $p(\omev\mid\rest) = \Dir(\omev\mid\tfrac{\al}{K}+n_1,\ldots,\tfrac{\al}{K}+n_K)$, where $n_k$ is the number of actors in cluster $k\in\{1,\ldots,K  \}$.
+	
+	\item Sample $(\si^2)^{(b+1)}$ from
+	$p(\sig^2\mid\rest) = \IGamd\le(\sig^2 \mid a_\sig + \tfrac{K\,Q}2, b_\sig + \tfrac12 \textstyle\sum_{k=1}^K\|\uv_k\|^2 \ri)\,.$
+	
+	\item Sample $(\kap^2)^{(b+1)}$ from
+	$p(\kap^2\mid\rest) = \IGamd\le(\kap^2 \mid a_\kap + \tfrac{Q}2, b_\kap + \tfrac12 \textstyle\sum_{q=1}^Q\lambda_q^2 \ri)\,.$
+	
+	\item Sample $(\ome^2)^{(b+1)}$ from
+	$p(\ome^2\mid\rest) = \IGamd\le(\ome^2 \mid a_\sig + \tfrac12, b_\sig + \tfrac12 \zeta^2 \ri)\,.$
+	
+	\item Sample $\alpha^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	\log p(\alpha\mid\rest)
+	&\propto
+	\log\Gamma(\alpha) - K\log\Gamma(\alpha/K) + \frac{\al}{K}\sum_{k=1}^K\log\omega_k - (a_\al-1)\log\al - b_\al\,\al\,.
+	\end{align*}
+	
+\end{enumerate}
+
+
+\textbf{Prior Elicitation} 
+
+Setting a priori $\expec{\sigma^2} =\expec{\kappa^2} = \expec{\omega^2} = 3$, $\expec{\alpha^2} = 1$, with $\CV{\sigma^2} = \CV{\kappa^2} = \CV{\omega^2} = \infty$ and $\CV{\al} = 1$, it follows that
+$$
+a_\sig = 2\,,\quad b_\sig = 3  \,,\quad 
+a_\kap = 2\,,\quad b_\kap = 3  \,,\quad
+a_\ome = 2\,,\quad b_\ome = 3  \,,\quad
+a_\alpha = 1\,,\quad b_\alpha = 1\,.
+$$
+
+\section{Multilevel--Class Model}
+
+\textbf{Likelihood}
+$$
+y_{i,i'}\mid \xi_i,\xi_{i'}, \{\eta_{k,\ell}\} \simind \Ber\left( \expit \eta_{\phi(\xi_i,\xi_{i'})}  \right)
+$$
+\begin{align*}
+p(\Y\mid\{\xi_{i}\},\{\eta_{k,\ell}\}) &= \prod_{i=1}^{I-1}\prod_{i'=i+1}^I(\expit \eta_{\phi(\xi_i,\xi_{i'})})^{y_{i,i'}}(1-\expit \eta_{\phi(\xi_i,\xi_{i'})})^{1-y_{i,i'}} \\
+&=\prod_{k=1}^{K}\prod_{\ell=k}^K (\expit \eta_{k,\ell})^{s_{k,\ell}}(1-\expit \eta_{k,\ell})^{n_{k,\ell}-s_{k,\ell}}
+\end{align*}
+where $s_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} y_{i,i'}$ and $n_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} 1$, with $\mathcal{S}_{k,\ell} = \{(i,i'):i<i'\text{ and }\phi(\xi_i,\xi_{i'})=(k,\ell)\}$.
+
+\textbf{Prior}
+\begin{align*}
+\eta_{k,\ell} \mid\ga_k,\ga_\ell, \{\mu_{q,r}\},\sig^2 &\sim \Nor(\mu_{\phi(\ga_k,\ga_\ell)},\sig^2) \\
+\mu_{q,r} \mid \zeta,\tau^2 &\simind \Nor(\zeta,\tau^2) \\
+\zeta  &\sim \Nor(\mu_\zeta, \sig^2_\zeta) \\
+\tau^2 &\sim \IGamd(a_\tau,b_\tau)\\
+\sigma^2 &\sim \IGamd(a_\sig,b_\sig) \\
+\ga_k\mid\vtev &\simiid \Cat(\vtev) \\
+\vtev\mid\be &\sim \Dir\left(\tfrac{\be}{Q},\ldots,\tfrac{\be}{Q}\right) \\
+\be &\sim \Gamd(a_\be,b_\be) \\
+\xi_i\mid\omev &\simiid \Cat(\omev) \\
+\omev\mid\al &\sim \Dir\left(\tfrac{\al}{K},\ldots,\tfrac{\al}{K}\right) \\
+\al &\sim \Gamd(a_\al,b_\al)
+\end{align*}
+
+\textbf{Parameters}
+$$\UPS=(\eta_{1,1},\eta_{1,2},\ldots,\eta_{K,K},\mu_{1,1},\mu_{1,2},\ldots,\mu_{Q,Q},\zeta,\tau^2,\sig^2,\ga_1,\ldots,\ga_K,\vte_1,\ldots,\vte_Q, \beta, \xi_1,\ldots,\xi_I,\omega_1,\ldots,\omega_K, \alpha)\,,$$
+where $\xiv=(\xi_1,\ldots,\xi_I)$, $\xi_i\in\{1,\ldots,K\}$, are the actors-cluster assignments ($\xi_i=k$ means that actor $i$ belongs to cluster $k$), $\gav=(\ga_1,\ldots,\ga_K)$, $\ga_k\in\{1,\ldots,Q\}$, are the super-cluster assignments ($\ga_k=q$ means that cluster $k$ belongs to super-cluster $q$), $\phi(x,y)=(\min\{x,y\},\max\{x,y\})$ is a function to take into account that both $\Y = [y_{i,i'}]$ and $\etav=[\eta_{k,\ell}]$ are symmetric matrices, and $\omev=(\ome_1,\ldots,\ome_K)$ and $\vtev=(\vte_1,\ldots,\vte_Q)$ are probability vectors such that $\pr{\xi_i=k\mid \ome_k} = \ome_k$ and $\pr{\ga_k=q\mid \vte_q} =\vte_q$, respectively.
+
+\textbf{Hyper-parameters} $$(\mu_\zeta, \sig^2_\zeta, a_\tau, b_\tau, a_{\sig}, b_{\sig}, a_{\be}, b_{\be}, a_\al, b_\al)\,.$$
+
+\textbf{Posterior}
+\begin{align*}
+p(\UPS\mid\Y)
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^{I} \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}} 
+\times \prod_{k=1}^K\prod_{\ell=k}^K (\sigma^2)^{-1/2}\,\ex{-\tfrac{1}{2\sigma^2}\left(\eta_{k,\ell} - \mu_{\phi(\ga_k,\ga_\ell)}\right)^2} \\
+&\hspace{0.5cm} \times \prod_{q=1}^{Q}\prod_{r=q}^{Q}(\tau^2)^{-\tfrac12}\,\ex{-\tfrac{1}{2\tau^2}(\mu_{q,r}-\zeta)^2}
+\times \ex{-\tfrac{1}{2\sigma^2_\zeta}(\zeta-\mu_\zeta)^2}
+\times (\tau^2)^{-(a_\tau-1)}\,\ex{-\frac{b_\tau}{\tau^2}}\\
+&\hspace{0.5cm} \times (\sigma^2)^{-(a_\sig-1)}\,\ex{-\frac{b_\sig}{\sigma^2}} 
+\times \prod_{k=1}^K\prod_{q=1}^Q\vartheta_q^{[\gamma_k=q]} 
+\times \frac{\Gamma\left(\tfrac{\beta}{Q}\right)^Q}{\Gamma(\beta)}\,\prod_{q=1}^Q \vartheta_q^{\tfrac{\beta}{Q}-1} 
+\times \beta^{a_\beta-1}\,\ex{-b_\beta\,\beta} \\
+&\hspace{0.5cm} \times \prod_{i=1}^I\prod_{k=1}^K\omega_k^{[\xi_i=k]}
+\times \frac{\Gamma\left(\tfrac{\al}{K}\right)^K}{\Gamma(\alpha)}\,\prod_{k=1}^K \ome_k^{\tfrac{\al}{K}-1}
+\times \alpha^{a_\al-1}\,\ex{-b_\al\,\al}\,, \\
+\end{align*}
+where $\theta_{i,i'}=\expit\eta_{\phi(\xi_i,\xi_{i'})}$ and $[\cdot]$ is the Iverson bracket.
+
+\textbf{MCMC}
+
+The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current state $\UPS^{(b)}$, $b=1,\ldots,B$, as follows:
+\begin{enumerate}
+	
+	\item Sample $\eta_{k,\ell}^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	\log p(\eta_{k,\ell}\mid\rest) 
+	&\propto 
+	s_{k,\ell}\log(\expit\eta_{k,\ell}) + (n_{k,\ell}-s_{k,\ell})\log(1-\expit\eta_{k,\ell}) - \frac{1}{2\sigma^2}(\eta_{k,\ell} - \mu_{\phi(\ga_k,\ga_\ell)})^2 \\
+	&= s_{k,\ell}\,\eta_{k,\ell} - n_{k,\ell} \log(1 + \exp\,\eta_{k,\ell}) - \frac{1}{2\sigma^2}(\eta_{k,\ell} - \mu_{\phi(\ga_k,\ga_\ell)})^2\,,
+	\end{align*}
+	where $s_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} y_{i,i'}$ and $n_{k,\ell} = \sum_{\mathcal{S}_{k,\ell}} 1$, with $\mathcal{S}_{k,\ell} = \{(i,i'):i<i'\text{ and }\phi(\xi_i,\xi_{i'})=(k,\ell)\}$. 
+	
+	\item Sample $\mu_{q,r}^{(b+1)}$ from $\Nor(m,v^2)$, where
+	$$v^2 = \left(\frac{1}{\tau^2} + \frac{n_{q,r}}{\sigma^2}\right)^{-1} \qquad\text{and}\qquad m =	v^2\,\left( \frac{\zeta}{\tau^2} + \frac{s_{q,r}}{\sigma^2} \right)\,,$$
+	where $s_{q,r} = \sum_{\mathcal{S}_{q,r}} \eta_{k,\ell}$ and $n_{q,r} = \sum_{\mathcal{S}_{q,r}} 1$, with $\mathcal{S}_{q,r} = \{(k,\ell):k\leq \ell\text{ and }\phi(\ga_k,\ga_\ell)=(q,r)\}$. 
+	
+	\item Sample $\zeta^{(b+1)}$ from $\Nor(m,v^2)$, where
+	$$
+	v^2 = \left(\frac{1}{\sig^2_\zeta} + \frac{n_Q}{\tau^2}\right)^{-1} \qquad\text{and}\qquad m =	v^2\,\left( \frac{\mu_\zeta}{\sig^2_\zeta} + \frac{\mu_{\boldsymbol{\cdot}\boldsymbol{\cdot}}}{\tau^2} \right)\,,
+	$$
+	where $n_Q = Q(Q+1)/2$ and  $\mu_{\boldsymbol{\cdot}\boldsymbol{\cdot}} = \sum_{q=1}^Q\sum_{r=q}^Q \mu_{q,r}$\,.
+	
+	\item Sample $(\tau^2)^{(b+1)}$ from $\IGamd(a,b)$, where
+	$$
+	a = a_\tau + n_Q/2  \qquad\text{and}\qquad  b = b_\tau + \tfrac12\sum_{q=1}^Q\sum_{r=q}^Q  (\mu_{q,r} - \zeta)^2\,,
+	$$ 
+	where $n_Q = Q(Q+1)/2$.
+	
+	\item Sample $(\sig^2)^{(b+1)}$ from $\IGamd(a,b)$, where
+	$$
+	a = a_\sig + n_K/2  \qquad\text{and}\qquad  b = b_\sig + \tfrac12\sum_{k=1}^K\sum_{\ell=k}^K (\eta_{k,\ell} - \mu_{\phi(\ga_k,\ga_\ell)})^2\,,
+	$$ 
+	where $n_K = K(K+1)/2$.	
+	
+	\item Sample $\ga_k^{(b+1)}$ from a categorical distribution on $\{1,\ldots,Q\}$, such that:
+	$$
+	\pr{\ga_k=q\mid\rest}\propto \vartheta_q
+	\times\prod_{\ell=k}^K \Nor(\eta_{k,\ell} \mid \mu_{\phi(q,\ga_\ell)}, \sig^2) 
+	\times\prod_{\ell=1}^{k-1} \Nor(\eta_{\ell,k} \mid \mu_{\phi(q,\ga_\ell)}, \sig^2)\,,
+	$$
+	for $q \in \{1,\ldots,Q \}$.
+	
+	\item Sample $\vtev^{(b+1)}$ from $p(\vtev\mid\rest) = \Dir\left(\vtev\mid\tfrac{\be}{Q}+n_1,\ldots,\tfrac{\be}{Q}+n_Q\right)$, where $n_q$ is the number of clusters in super-cluster $q \in \{1,\ldots, Q\}$.
+	
+	\item Sample $\beta^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\beta\mid\rest)
+	&\propto
+	\log\Gamma(\beta) - K\log\Gamma(\beta/Q) + \frac{\beta}{Q}\sum_{q=1}^Q\log\vartheta_q - (a_\beta-1)\log\beta - b_\beta\,\beta\,.
+	\end{align*}
+	
+	\item Sample $\xi_i^{(b+1)}$ from a categorical distribution on $\{1,\ldots,K\}$, such that:
+	$$
+	\pr{\xi_i=k\mid\rest}\propto \omega_k
+	\times\prod_{i'=i+1}^I \eta_{\phi(k,\xi_{i'})}^{y_{i,i'}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i,i'}}
+	\times\prod_{i'=1}^{i-1} \eta_{\phi(k,\xi_{i'})}^{y_{i',i}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i',i}}\,.
+	$$
+	for $k \in\{ 1,\ldots,K \}$.
+	
+	\item Sample $\omev^{(b+1)}$ from $p(\omev\mid\rest) = \Dir\left(\omev\mid\tfrac{\al}{K}+n_1,\ldots,\tfrac{\al}{K}+n_K\right)$, where $n_k$ is the number of actors in cluster $k\in\{1,\ldots,K\}$.
+	
+	\item Sample $\alpha^{(b+1)}$ according to a Metropolis--Hastings Algorithm, considering the fcd:
+	\begin{align*}
+	p(\alpha\mid\rest)
+	&\propto
+	\log\Gamma(\alpha) - K\log\Gamma(\alpha/K) + \frac{\al}{K}\sum_{k=1}^K\log\omega_k - (a_\alpha-1)\log\al - b_\al\,\al\,.
+	\end{align*}
+	
+\end{enumerate}
+
+
+\textbf{Prior Elicitation}
+$$
+\mu_\zeta    = 0,\quad 
+\sig^2_\zeta = 3,\quad
+a_\tau       = 2,\quad 
+b_\tau       = 3,\quad
+a_{\sig}     = 2,\quad
+b_{\sig}     = 3,\quad
+a_{\be}      = 1,\quad 
+b_{\be}      = 3,\quad 
+a_\al        = 1,\quad 
+b_\al        = 1\,.
+$$
+
+\section{WAIC}
+
+$$
+\text{lppd} = \sum_{i=1}^n\log\left(\frac{1}{B} \sum_{b=1}^B p(y_i\mid\theta^b) \right)
+$$
+
+$$
+p_{\text{WAIC}_1} = 2\sum_{i=1}^n\left[ \log\left(\frac{1}{B} \sum_{b=1}^B p(y_i\mid\theta^b)\right) - \frac{1}{B} \sum_{b=1}^B \log p(y_i\mid\theta^b) \right]
+$$
+
+$$
+p_{\text{WAIC}_2} = \frac{1}{B-1}\sum_{i=1}^n\sum_{b=1}^B (a_{i,b} - \bar{a}_i )^2\,,\qquad \bar{a}_i = \frac{1}{B}\sum_{b=1}^B a_{i,b} \,,\qquad a_{i,b} = \log p(y_i\mid \theta^b)
+$$
+
+$$
+\text{WAIC} = -2\,\text{lppd} + 2\,p_{\text{WAIC}}
+$$
+
+
+\end{document} 
