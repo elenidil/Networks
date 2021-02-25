@@ -1,9 +1,0 @@
-Notes for Nets.pdf file:
-
-#4 SBM:
-	step 5 -> should be 'sample τ^2' instead of 'σ^2'
-	step 6 -> should be 'α_alpha' instead of 'α_beta'
-
-#6 Class-Distance: 
-	in the posterior should be 'Π (σ^2) ^ (-Q/2)' instead of 'Π (σ^2) ^ (-Κ/2)'
-	step 2 -> exp(-ζ^2 / 2 ω^2)
