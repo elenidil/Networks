@@ -1,2 +1,33 @@
 notes: all files with sim3 are with data from ESBM paper
+GOF results:
+> gof_class
+$lppd
+[1] -3147.731
 
+$pWAIC1
+[1] 27.51203
+
+$pWAIC2
+[1] 27.70823
+
+$waic1
+[1] 6350.486
+
+$waic2
+[1] 6350.878
+
+> gof_clist
+$lppd
+[1] -3082.915
+
+$pWAIC1
+[1] 53.32995
+
+$pWAIC2
+[1] 53.8356
+
+$waic1
+[1] 6272.49
+
+$waic2
+[1] 6273.501
