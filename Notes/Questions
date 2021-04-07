@@ -30,7 +30,7 @@ wrapper_1
 1.	Same thing with loading the data
 2.	Now MCMC, gof_parallel, cv_parallel and test_parallel takes K_range but not Q_range
 3.	Line 63: “get_measures_1”, similarly to get_measures_0 creates a table with names K and Q although Q is not defined. 
-
+Update: This is to be used with class model since it doesn't have Q as input  argument
 
 
 Wrapper_2 works fine with all the functions
