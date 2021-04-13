@@ -2,3 +2,6 @@ notes
 For the clist model, the cv_parallel function is taking more than 1 hour to give the first result Κ=4,Q=2;l=1, for the rest it took from 6pm until later than 00:00
 
 In clist is not true that the model with the higher AUC has the better performance.
+
+Question: I have run the MCMC function twice for the same K(=5) and Q(=2) and the one time the incidence matrix produced is very close to the true image, while the second time is
+all red. Not sure why this happened.
