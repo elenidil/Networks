@@ -44,27 +44,6 @@ get_chains_data <- function(I, K, n_sams)
   list(Lambda_chain = Lambda_chain, Xi_chain = Xi_chain)
 }
 
-#sample_Xi_dp <- function(I, K, Lambda, Xi, Y, com_siz, alpha_dp){
-#  //#Xi_rver <- Xi + 1
-#    for(i in 1:I){
-#      logprobs <- rep(0, K)
-#      for(k in 1: K){
-#        if(is.na(com_siz[k])){
-#          if(com_siz[k] > 0){ logprobs[k] = logprobs[k] + log(com_siz[k]) }
-#          else if(com_siz[k] == 0){ logprobs[k] = logprobs[k] + log(alpha_dp)}
-#        }
-#        if(i < (I-1)) {for (ii in (i+2):I) { 
-#          logprobs[k] = logprobs[k] + 
-#            dbinom(Y[get_k(i,ii,I)], 1, expit(Lambda[get_k_diag(min(k, Xi[ii]+1), max(k, Xi[ii]+1), K)]), 1)} }
-#        if(i > 1) {for (ii in 1:(i-1)) { 
-#          logprobs[k] = logprobs[k] + 
-#            dbinom(Y[get_k(ii,i,I)], 1, expit(Lambda[get_k_diag(min(k, Xi[ii]+1), max(k, Xi[ii]+1), K)]), 1)}  }
-#      }
-#      Xi[i] <- wsample(exp(logprobs - max(logprobs))) //#I should add -1 since I have the +1 above?
-#    } 
-#  Xi //#not sure if this is needed 
-#} 
-  
 
 MCMC <- function(Y, K, n_sams, n_burn, n_skip, model, dataset, loc) #changed
 {
