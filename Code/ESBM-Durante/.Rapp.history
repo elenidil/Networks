@@ -1,0 +1,30 @@
+expected_cl_py <- function(n, sigma, theta, H){#
+  n <- as.integer(n)#
+  stopifnot(sigma >= 0, sigma < 1, theta > - sigma, n > 0, H > 1)#
+  if(H == Inf){#
+    if(sigma==0) {#
+    out <- theta * sum(1/(theta - 1 + 1:n))#
+    } else {#
+    out <- 1/sigma*exp(lgamma(theta + sigma + n) - lgamma(theta + sigma) - lgamma(theta + n) + lgamma(theta + 1)) - theta/sigma#
+    }#
+  } else if(H < Inf){#
+    if(sigma==0) {#
+      index <- 0:(n-1)#
+      out <- H - H*exp(sum(log(index + theta*(1 - 1/H)) - log(theta+ index)))#
+    }#
+  }#
+  return(out)#
+}
+sigma_dp <- 0   #
+H_dp <- Inf #
+alpha_dp <- 15#2.55#15#
+expected_cl_py(V, sigma = sigma_dp, theta = alpha_dp, H = H_dp)
+V <- 100
+sigma_dp <- 0   #
+H_dp <- Inf #
+alpha_dp <- 15#2.55#15#
+expected_cl_py(V, sigma = sigma_dp, theta = alpha_dp, H = H_dp)
+sigma_dp <- 0   #
+H_dp <- Inf #
+alpha_dp <- 2.55#15#
+expected_cl_py(V, sigma = sigma_dp, theta = alpha_dp, H = H_dp)
