@@ -1,41 +1,31 @@
-Questions on the code/SBM-Distance/wrapper.R
-https://github.com/elenidil/Networks/blob/master/Code/SBM-Distance/wrapper.R
+Questions on evaluating goodness of fit
 
-wrapper_0
-1.	Line 17: loads some test_data.RData (since dataset = “test”) which I don’t have. I only have access to jazz_data and netscience_data 
+If this is the ground truth
+> z_0
+  [1]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  2  3  3
+ [38]  3  3  3  3  3  3  3  3  3  4  4  4  4  4  4  4  4  4  4  4  5  5  5  5  5  5  5  5  5  5  5  6  6  6  6  6  6
+ [75]  6  6  6  6  6  7  7  7  7  7  7  7  7  7  7  7  8  8  8  8  8  8  8  8  8  8  8  9  9  9  9  9  9  9  9  9  9
+[112]  9 10 10 10 10 10 10 10 10 10 10 10 11 11 11 11 11 11 11 11 11 11 11 12 12 12 12 12 12 12 12 12 12 12 13 13 13
+[149] 13 13 13 13 13 13 13 13 14 14 14 14 14 14 14 14 14 14 14 15 15 15 15 15 15 15 15 15 15 15 16 16 16 16 16 16 16
+[186] 16 16 16 16 17 17 17 17 17 17 17 17 17 17 17
 
-2.	Line 22: MCMC takes as arguments those function(Y, K, Q, n_sams, n_burn, n_skip, model, dataset, loc) but here is called like this
-MCMC(Y, n_sams, n_burn, n_skip, model, dataset, loc).
-I have added K=5 and Q=2 like it is in clist_test.R file, but I am not sure if I’m supposed to do that
+and this is the result I get from the code
+> THETA$Xi_chain[25000,]
+  [1]  2 26  2  2 26  2 26  2  2  2 18 18 18 18 18  3  0  0  2  3 20 20 20 20 20  5  5  6 18  5  6  6  6  6  6  6  6
+ [38]  6  6  6  9  9  9  9  9  9  9  9  9  9 20 20 20 20 20 20 20 20 20 20 28 10 10 10 10 10 10 10 10 10 20 20 20 20
+ [75] 20 20 20 20 20 20 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 18 18 18 18 18 18 18 18 18 18 18
+[112] 18 18 18 18 18 18 18 18 18 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 26 26 26 26 26 26 26  2
+[149] 26 26 26 26 26 26 26 26 26 26 26 26 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 20 20 20 20 20
+[186] 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
 
-3.	Line 23: Similar for GOF function, it needs to have THETA in the input arguments.
-
-4.	Line 26: cv_parallel similarly needs as inputs K_range and Q_range which are not given here. I saw somewhere in the code it assigns c(2,4,8) to both of them. 
-This function takes a lot of time since inside it has also l=1,…,5. 
-This is the output:   save(cv, file = paste0(loc, "outs/", dataset, "/", model, "_K_", K, "_Q_", Q, "_l_", l, "_", dataset, "_", "cv.RData"))
-
-5.	Line 29: the same for test_parallel, where input values K_range and Q_range are missing and instead it has I.
+> unique(z_dm_init[25000,])
+ [1]  2 26 18  3  0 20  5  6  9 28 10 13 22
  
-6.	Line 32: “get_measures_0” is a function from folder rfunctions.R, starts in line 130. 
-Line 149 loads  load(paste0(loc, "outs/", dataset, "/", model, "_l_", l, "_", dataset, "_", "cv.RData")). 
-There is no function in the folder that produces that output, the closest one is cv_parallel but the output includes K and Q. 
-I was thinking, if it’s possible when calling the cv_parallel function, without defining K and Q somehow it can produce those files, but it doesn’t work.
-Line 158: it loads   #load(paste0(loc, "outs/", dataset, "/", model, "_", dataset, "_", "test.RData"))	
-some clist_test_test.RData, which should contain ‘stats’ to be used later:
-  for (l in 1:n_stats) tab[4+l] <- round(mean(stats[,l] > stats_obs[l], na.rm = T), 6).
-The function test_parallel produces this output but contains K and Q.
-
-
-wrapper_1
-1.	Same thing with loading the data
-2.	Now MCMC, gof_parallel, cv_parallel and test_parallel takes K_range but not Q_range
-3.	Line 63: “get_measures_1”, similarly to get_measures_0 creates a table with names K and Q although Q is not defined. 
-Update: This is to be used with class model since it doesn't have Q as input  argument
-
-
-Wrapper_2 works fine with all the functions
-
-Other questions:
-1) When loading the simulated data, for example those from the paper or the ones produced by the function, we cannot use the generate function data
-so we don't have the values for U, Xi, Eta, zeta, sigsq before runnning the MCMC, and so we cannot plot those plot_chain(THETA$loglik_chain, ll, main = "Log-likelihood")
-2) After I divide the data into test and train how to test the model? 
+ How can I compare the node cluster assignments?
+ 
+ It's easy to relabel the ouput vector but that's not enough
+ One idea is to modify the code, so it relabels the clusters and produces an easier to handle ouput, but still it has small clusters with a few nodes
+ 
+ Although I set the alpha and sigma to give an expected number of clusters 5, it gives more, but some with 1-2 nodes
+ 
+ 
