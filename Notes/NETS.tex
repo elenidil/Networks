@@ -46,7 +46,7 @@
 \futurelet\reserved@a\@xhline}
 \makeatother
 %%% ----------------------------------------------------------------------
-%%% FORMATO DE P¡GINA ----------------------------------------------------
+%%% FORMATO DE P√ÅGINA ----------------------------------------------------
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \oddsidemargin   0.2  in
 \evensidemargin  0.2  in
@@ -62,7 +62,7 @@
 \renewcommand{\baselinestretch}{1.25}
 \renewcommand{\labelitemi}{$\bullet$}
 %%% ----------------------------------------------------------------------
-% SÕMBOLOS ---------------------------------------------------------------
+% S√çMBOLOS ---------------------------------------------------------------
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \def\e#1{{\rm e}^{#1}}
 \def\exp#1{{\rm exp}{#1}}
@@ -346,7 +346,7 @@ $$(\mu_\zeta,\sigma^2_\zeta,a_\tau,b_\tau,a_\al,b_\al)\,.$$
 \textbf{Posterior}
 \begin{align*}
 p(\UPS\mid\Y) &= p(\Y\mid\{\xi_i\},\{\eta_{k,\ell}\})\,p(\{\eta_{k,\ell}\}\mid\zeta,\tau^2)\,p(\zeta)\,p(\tau^2)\,p(\{\xi_i \}\mid\omev)\,p(\omev\mid\alpha)\,p(\alpha)\\
-&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{i,i'}^{y_{i,i'}}(1-\theta_{i,i'})^{1-y_{i,i'}}
+&\propto\prod_{i=1}^{I-1}\prod_{i'=i+1}^I \theta_{\xi_i,\xi_{i'}}^{y_{i,i'}}(1-\theta_{\xi_i,\xi_{i'}})^{1-y_{i,i'}}
 \times \ex{-\tfrac{1}{2\sig_\zeta^2}(\zeta-\mu_\zeta)^2} \times (\tau^2)^{-(a_\tau-1)}\,\ex{-\frac{b_\tau}{\tau^2}} \\
 &\hspace{0.5cm} \times \prod_{k=1}^K\prod_{\ell=k}^K (\tau^2)^{-1/2}\,\ex{-\tfrac{1}{2\tau^2}(\eta_{k,\ell} - \zeta)^2} \times \prod_{i=1}^I\prod_{k=1}^K\omega_k^{[\xi_i=k]} \times \frac{\Gamma\left(\tfrac{\al}{K}\right)^K}{\Gamma(\alpha)}\,\prod_{k=1}^K \ome_k^{\tfrac{\al}{K}-1}\\
  &\hspace{0.5cm}\times \alpha^{a_\al-1}\,\ex{-b_\al\,\al}\,,
@@ -371,9 +371,17 @@ The algorithm proceeds by generating a new state $\UPS^{(b+1)}$ from a current s
 	\item Sample $\xi_i^{(b+1)}$, $i=1,\ldots,I$, from a categorical distribution on $\{1,\ldots,K\}$, such that:
 	$$
 	\pr{\xi_i=k\mid\rest}\propto \omega_k
-	\times\prod_{i'=i+1}^I \eta_{\phi(k,\xi_{i'})}^{y_{i,i'}}(1-\eta_{\phi(k,\xi_{i'})})^{1-y_{i,i'}}
-	\times\prod_{i'=1}^{i-1} \eta_{\phi(\xi_{i'},k)}^{y_{i',i}}(1-\eta_{\phi(\xi_{i'},k)})^{1-y_{i',i}}\,.
+	\times\prod_{i'=i+1}^I \theta_{k,\xi_{i'}}^{y_{i,i'}}(1-\theta_{k,\xi_{i'}})^{1-y_{i,i'}}
+	\times\prod_{i'=1}^{i-1} \theta_{\xi_{i'},k}^{y_{i',i}}(1-\theta_{\xi_{i'},k})^{1-y_{i',i}}\,.
 	$$
+	
+	\textcolor{blue}{Note that the term above actually comes from the following:
+	$$\pr{\xi_i=k\mid \xiv_{-i}, \rest}\propto \pi(\xiv) \frac{\pr{\xi_i=k, \xiv_{-i} \mid \rest}}{\pr{\xiv_{-i} \mid \rest}},$$
+	where $\xiv_{-i}$ is the vector of cluster assignments excluding element $i$ and $\pi(\xiv)$ is the prior distribution on cluster assignments (i.e. it could  be DM, DP, PY or Gnedin). Note that the likelihood term is:
+	$$ \frac{\pr{\xi_i=k, \xiv_{-i} \mid \rest}}{\pr{\xiv_{-i} \mid \rest}} = \dfrac{\prod_{i'=1}^{I-1}\prod_{j=i'+1}^I \theta_{\xi_{i'},\xi_j}^{y_{i',j}}(1-\theta_{\xi_{i'},\xi_j})^{1-y_{i',j}}}{\prod_{i'=1, \textcolor{red}{i'\neq i}}^{I-1}\prod_{j=i'+1}^I \theta_{\xi_{i'},\xi_j}^{y_{i',j}}(1-\theta_{\xi_{i'},\xi_j})^{1-y_{i',j}}}$$
+	Note that all the terms in the numerator will cancel out with exception of the one for $i'=i$ where $\xi_{i}=k$.
+	}
+	 
 	
 	\item Sample $\omev^{(b+1)}$ from $p(\omev\mid\rest) = \Dir\left(\omev\mid\tfrac{\al}{K}+n_1,\ldots,\tfrac{\al}{K}+n_K\right)$, where $n_k$ is the number of actors in cluster $k\in\{1,\ldots,K\}$.
 	
